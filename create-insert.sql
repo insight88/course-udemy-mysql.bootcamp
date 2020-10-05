@@ -102,3 +102,62 @@ CREATE TABLE cats4
 INSERT INTO cats4(name, age) VALUES('Cali', NULL);
 -- ? error 1048 occurs!
 
+INSERT INTO cats VALUES ('Helena', 6);
+INSERT INTO cats VALUES ('Helena', 6);
+INSERT INTO cats VALUES ('Helena', 6);
+INSERT INTO cats VALUES ('Helena', 6);
+
+-- ! example 5 : data overlapping is allowed! We need to make data uniquely identifiable. (PRIMARY KEY)
+
+CREATE TABLE unique_cats
+(
+    cat_id INT NOT NULL,
+    name VARCHAR(100),
+    age INT,
+    PRIMARY KEY (cat_id)
+    -- * PRIMARY KEY : doesn't allow to duplicate same key 
+);
+
+INSERT INTO unique_cats(cat_id, name, age) VALUES(1, 'Fred', 23);
+INSERT INTO unique_cats(cat_id, name, age) VALUES(2, 'Louise', 3);
+INSERT INTO unique_cats(cat_id, name, age) VALUES(1, 'James', 3);
+
+CREATE TABLE unique_cats2
+(
+    cat_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    age INT,
+    PRIMARY KEY (cat_id)
+);
+
+INSERT INTO unique_cats2(name, age) VALUES('Skippy', 4);
+INSERT INTO unique_cats2(name, age) VALUES('Jiff', 3);
+INSERT INTO unique_cats2(name, age) VALUES('Jiff', 3);
+INSERT INTO unique_cats2(name, age) VALUES('Jiff', 3);
+INSERT INTO unique_cats2(name, age) VALUES('Skippy', 4);
+
+-- ! Exercise
+
+CREATE TABLE Employees
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    last_name VARCHAR(10) NOT NULL,
+    first_name VARCHAR(10) NOT NULL,
+    middle_name VARCHAR(10),
+    age INT NOT NULL,
+    current_status VARCHAR(20) NOT NULL DEFAULT 'employed',
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Employees
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    last_name VARCHAR(10) NOT NULL,
+    first_name VARCHAR(10) NOT NULL,
+    middle_name VARCHAR(10),
+    age INT NOT NULL,
+    current_status VARCHAR(20) NOT NULL DEFAULT 'employed'
+);
+
+INSERT INTO employees(first_name, last_name, age) 
+VALUES ('Dora', 'Smith', 58);
