@@ -1,9 +1,9 @@
 CREATE TABLE cats
 (
-  cat_id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(100),
-  age INT,
-  PRIMARY KEY(cat_id)
+    cat_id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    age INT,
+    PRIMARY KEY(cat_id)
 );
 
 -- mysql-ctl cli
@@ -30,14 +30,14 @@ USE book_shop;
 
 CREATE TABLE books 
 (
-  book_id INT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(100),
-  author_fname VARCHAR(100),
-  author_lname VARCHAR(100),
-  released_year INT,
-  stock_quantity INT,
-  pages INT,
-  PRIMARY KEY(book_id)
+    book_id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(100),
+    author_fname VARCHAR(100),
+    author_lname VARCHAR(100),
+    released_year INT,
+    stock_quantity INT,
+    pages INT,
+    PRIMARY KEY(book_id)
 );
 
 INSERT INTO books (title, author_fname, author_lname, released_year, stock_quantity, pages)
@@ -72,20 +72,30 @@ CONCAT(author_fname, author_lname); // invalid syntax
 
 SELECT CONCAT('Hello', 'World');
 SELECT CONCAT('Hello', '...', 'World');
+
 SELECT
   CONCAT(author_fname, ' ', author_lname)
 FROM books;
+
 SELECT
   CONCAT(author_fname, ' ', author_lname)
   AS 'full name'
 FROM books;
+
 SELECT author_fname AS first, author_lname AS last, 
   CONCAT(author_fname, ' ', author_lname) AS full
 FROM books;
+
 SELECT author_fname AS first, author_lname AS last, 
   CONCAT(author_fname, ', ', author_lname) AS full
 FROM books;
+
 SELECT CONCAT(title, '-', author_fname, '-', author_lname) FROM books;
+
+-- * CONCAT_WS (concat with seperator)
+-- ? CONCAT_WS(seperator, word1, word2, word3)
+-- ? seperator will be sandwitched every time
+
 SELECT 
     CONCAT_WS(' - ', title, author_fname, author_lname) 
 FROM books;
@@ -94,15 +104,19 @@ FROM books;
 
 SELECT SUBSTRING('Hello World', 1, 4);
 SELECT SUBSTRING('Hello World', 7);
+-- * from 7 to the end
 SELECT SUBSTRING('Hello World', 3, 8);
 SELECT SUBSTRING('Hello World', 3);
 SELECT SUBSTRING('Hello World', -3);
+-- * last 3 characters
 SELECT SUBSTRING('Hello World', -7);
+
 SELECT title FROM books;
 SELECT SUBSTRING("Where I'm Calling From: Selected Stories", 1, 10);
 SELECT SUBSTRING(title, 1, 10) FROM books;
 SELECT SUBSTRING(title, 1, 10) AS 'short title' FROM books;
 SELECT SUBSTR(title, 1, 10) AS 'short title' FROM books;
+-- ? SUBSTR() == SUBSTRING()
 SELECT CONCAT
     (
         SUBSTRING(title, 1, 10),
@@ -110,16 +124,12 @@ SELECT CONCAT
     )
 FROM books;
 
-source book_code.sql
-
 SELECT CONCAT
     (
         SUBSTRING(title, 1, 10),
         '...'
     ) AS 'short title'
 FROM books;
-
-source book_code.sql
 
 -- * Replace
 
@@ -131,13 +141,13 @@ SELECT
   REPLACE('cheese bread coffee milk', ' ', ' and ');
 SELECT REPLACE(title, 'e ', '3') FROM books;
 
--- SELECT
---    CONCAT
---    (
---        SUBSTRING(title, 1, 10),
---        '...'
---    ) AS 'short title'
--- FROM books;
+SELECT
+   CONCAT
+   (
+       SUBSTRING(title, 1, 10),
+       '...'
+   ) AS 'short title'
+FROM books;
 
 SELECT
     SUBSTRING(REPLACE(title, 'e', '3'), 1, 10)
