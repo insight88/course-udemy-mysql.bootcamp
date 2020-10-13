@@ -53,7 +53,7 @@ VALUES
 ('A Heartbreaking Work of Staggering Genius', 'Dave', 'Eggers', 2001, 104, 437),
 ('Coraline', 'Neil', 'Gaiman', 2003, 100, 208),
 ('What We Talk About When We Talk About Love: Stories', 'Raymond', 'Carver', 1981, 23, 176),
-("Where I'm Calling From: Selected Stories", 'Raymond', 'Carver', 1989, 12, 526),
+('Where I\'m Calling From: Selected Stories', 'Raymond', 'Carver', 1989, 12, 526),
 ('White Noise', 'Don', 'DeLillo', 1985, 49, 320),
 ('Cannery Row', 'John', 'Steinbeck', 1945, 95, 181),
 ('Oblivion: Stories', 'David', 'Foster Wallace', 2004, 172, 329),
@@ -112,10 +112,10 @@ SELECT SUBSTRING('Hello World', -3);
 SELECT SUBSTRING('Hello World', -7);
 
 SELECT title FROM books;
-SELECT SUBSTRING("Where I'm Calling From: Selected Stories", 1, 10);
+SELECT SUBSTRING('Where I\'m Calling From: Selected Stories', 1, 10);
 SELECT SUBSTRING(title, 1, 10) FROM books;
-SELECT SUBSTRING(title, 1, 10) AS 'short title' FROM books;
-SELECT SUBSTR(title, 1, 10) AS 'short title' FROM books;
+SELECT SUBSTRING(title, 1, 10) AS short_title FROM books;
+SELECT SUBSTR(title, 1, 10) AS short_title FROM books;
 -- ? SUBSTR() == SUBSTRING()
 SELECT CONCAT
     (
@@ -128,7 +128,7 @@ SELECT CONCAT
     (
         SUBSTRING(title, 1, 10),
         '...'
-    ) AS 'short title'
+    ) AS short_title
 FROM books;
 
 -- * Replace
@@ -142,11 +142,10 @@ SELECT
 SELECT REPLACE(title, 'e ', '3') FROM books;
 
 SELECT
-   CONCAT
-   (
-       SUBSTRING(title, 1, 10),
-       '...'
-   ) AS 'short title'
+  CONCAT
+  (
+      SUBSTRING(title, 1, 10), '...'
+  ) AS short_title
 FROM books;
 
 SELECT
@@ -154,7 +153,7 @@ SELECT
 FROM books;
 
 SELECT
-    SUBSTRING(REPLACE(title, 'e', '3'), 1, 10) AS 'weird string'
+    SUBSTRING(REPLACE(title, 'e', '3'), 1, 10) AS weird_string
 FROM books;
 
 -- * Reverse
@@ -172,10 +171,41 @@ SELECT author_lname, CHAR_LENGTH(author_lname) AS 'length' FROM books;
 SELECT CONCAT(author_lname, ' is ', CHAR_LENGTH(author_lname), ' characters long') FROM books;
 
 -- * Upper case & Lower Case
-
+-- ? UPPER() & LOWER() takes only one arguement
 SELECT UPPER('Hello World');
 SELECT LOWER('Hello World');
 SELECT UPPER(title) FROM books;
 SELECT CONCAT('MY FAVORITE BOOK IS ', UPPER(title)) FROM books;
 SELECT CONCAT('MY FAVORITE BOOK IS ', LOWER(title)) FROM books;
+
+-- * Exercise
+
+SELECT REVERSE('Why does my cat look at me with such hatred?');
+SELECT UPPER('Why does my cat look at me with such hatred?');
+
+SELECT REPLACE(title, ' ', '->') FROM books;
+
+SELECT  author_lname AS forwards, 
+        Reverse(author_lname) AS backwards 
+FROM    books; 
+
+SELECT 
+      UPPER
+      (
+        CONCAT(author_fname, ' ', author_lname)
+      ) AS full_name_in_caps
+FROM books;
+
+SELECT 
+    CONCAT(title, ' was released in ', released_year) AS 'blurb'
+FROM books;
+
+SELECT  title,
+        CHAR_LENGTH(title) AS character_count
+FROM books;
+
+SELECT  CONCAT(SUBSTRING(title, 1, 10), '...') AS short_title,
+        CONCAT(author_fname, " ", author_lname) AS author,
+        CONCAT(stock_quantity, " in stock") AS quantity
+FROM books;
 
