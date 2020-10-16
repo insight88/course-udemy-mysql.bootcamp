@@ -11,7 +11,7 @@ INSERT INTO books
 SELECT title FROM books;
 SELECT author_lname FROM books;
 SELECT DISTINCT author_lname FROM books;
- 
+
 SELECT author_fname, author_lname FROM books;
 SELECT DISTINCT CONCAT(author_fname,' ', author_lname) FROM books;
 SELECT DISTINCT author_fname, author_lname FROM books;
@@ -22,7 +22,7 @@ SELECT DISTINCT author_fname, author_lname FROM books;
 
 SELECT author_lname FROM books;
 SELECT author_lname FROM books ORDER BY author_lname;
- 
+
 SELECT title FROM books;
 SELECT title FROM books ORDER BY title;
 SELECT author_lname FROM books ORDER BY author_lname DESC;
